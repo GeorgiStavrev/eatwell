@@ -1,4 +1,4 @@
-import { getDishByPermalink, getDishes } from "../services/fakeDishService";
+import svc from "../services/fakeDishService";
 
 export const types = {
   GET_DISH_BY_PERMALINK: "GET_DISH_BY_PERMALINK",
@@ -10,10 +10,8 @@ export const types = {
 
 const getAllDishes = () => {
   return async dispatch => {
-    console.log("getAllDishes");
-    const dishes = await getDishes();
+    const dishes = await svc.getDishes();
     if (dishes) {
-      console.log("getAllDishes: receiveDishList", dishes);
       dispatch(receiveDishList(dishes));
     } else {
       console.log("getAllDishes: NO DISHES FOUND");
@@ -21,9 +19,9 @@ const getAllDishes = () => {
   };
 };
 
-const getDishByPerma = permalink => {
+const getDishByPermalink = permalink => {
   return async dispatch => {
-    const dish = await getDishByPermalink(permalink);
+    const dish = await svc.getDishByPermalink(permalink);
     if (dish) {
       dispatch(receiveDish(dish));
     } else {
@@ -33,7 +31,6 @@ const getDishByPerma = permalink => {
 };
 
 const receiveDishList = dishes => {
-  console.log("receiveDishList");
   return { type: types.RECEIVED_DISH_LIST, payload: dishes };
 };
 
@@ -49,7 +46,7 @@ const dishNotFound = (dishId, permalink) => {
 export const dishActions = {
   getAllDishes,
   receiveDishList,
-  getDishByPerma,
+  getDishByPermalink,
   receiveDish,
   dishNotFound
 };

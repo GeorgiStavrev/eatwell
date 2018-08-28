@@ -19,10 +19,15 @@ const recipes = [
   }
 ];
 
-export async function getAllRecipes() {
+async function getAllRecipes() {
   return recipes;
 }
 
-export async function getDishRecipes(dishId) {
+async function getDishRecipes(dishId) {
   return recipes.filter(r => r.dishId === dishId);
 }
+
+export default {
+  getAllRecipes,
+  getDishRecipes
+};

@@ -1,4 +1,4 @@
-import { types } from "../actions/dishes";
+import { types } from "../actions/dish";
 
 export default (state = {}, action) => {
   const { type, payload } = action;
@@ -15,7 +15,6 @@ export default (state = {}, action) => {
       };
     }
     case types.RECEIVED_DISH_LIST: {
-      console.log("RECEIVED_DISH_LIST");
       return { ...state, dishes: payload };
     }
     default:

@@ -18,10 +18,15 @@ const dishes = [
   }
 ];
 
-export async function getDishes() {
+async function getDishes() {
   return dishes;
 }
 
-export async function getDishByPermalink(permalink) {
+async function getDishByPermalink(permalink) {
   return dishes.find(d => d.permalink === permalink);
 }
+
+export default {
+  getDishes,
+  getDishByPermalink
+};

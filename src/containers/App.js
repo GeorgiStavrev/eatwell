@@ -3,18 +3,18 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 //Services
-import { getDishes } from "./services/fakeDishService";
+import { getDishes } from "../services/fakeDishService";
 
 //Components
-import DishRecipes from "./components/dishRecipes";
-import NavBar from "./components/navBar";
-import Dashboard from "./components/dashboard";
+import DishRecipes from "./dishRecipes";
+import NavBar from "../components/navBar";
+import Dashboard from "../components/dashboard";
 
 //CSS
-import "./App.css";
+import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { simpleAction } from "./actions/simpleAction";
-import { dishActions } from "./actions/dishes";
+import { simpleAction } from "../actions/simpleAction";
+import { dishActions } from "../actions/dish";
 
 class App extends Component {
   async componentDidMount() {
@@ -28,6 +28,7 @@ class App extends Component {
   };
 
   render() {
+    const { dishData } = this.props;
     return (
       <BrowserRouter>
         <div>
@@ -42,20 +43,30 @@ class App extends Component {
             <Switch>
               <Route
                 path="/dish/:dish/recipes"
-                render={props => (
+                render={routerProps => (
                   <DishRecipes
-                    {...props}
+                    {...routerProps}
                     onClickRecipe={this.handleShowVideo}
                   />
                 )}
               />
-              <Route path="/" render={props => <Dashboard {...props} />} />
+              <Route path="/" render={this.renderDashboard} />
             </Switch>
           </main>
         </div>
       </BrowserRouter>
     );
   }
+
+  renderDashboard = routerProps => {
+    const { dishData } = this.props;
+    return <Dashboard {...routerProps} dishes={dishData.dishes} />;
+  };
+
+  loadDishData = dishPermalink => {
+    const { dispatch } = this.props;
+    dispatch(dishActions.getDishByPermalink(dishPermalink));
+  };
 
   handleShowVideo = recipeId => {
     console.log(recipeId);
