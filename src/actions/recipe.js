@@ -1,10 +1,10 @@
 import svc from "../services/fakeRecipeService";
 import dishSvc from "../services/fakeDishService";
-import configureStore from "../store";
 
 export const types = {
   RECIPES_FOUND: "RECIPES_FOUND",
-  LOADING_RECIPES: "LOADING_RECIPES"
+  LOADING_RECIPES: "LOADING_RECIPES",
+  SELECTED_RECIPE: "SELECTED_RECIPE"
 };
 
 const getRecipesByDishPermalink = dishPermalink => {
@@ -46,7 +46,12 @@ const recipesFound = recipes => {
   return { type: types.RECIPES_FOUND, payload: recipes };
 };
 
+const selectRecipe = recipe => {
+  return { type: types.SELECTED_RECIPE, payload: recipe };
+};
+
 export const recipeActions = {
   getRecipesByDishId,
-  getRecipesByDishPermalink
+  getRecipesByDishPermalink,
+  selectRecipe
 };

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+// Actions
 import { dishActions } from "../actions/dish";
 import { recipeActions } from "../actions/recipe";
 
-//Components
+// Components
 import DishCard from "../components/dishCard";
 import Recipes from "../components/recipes";
 
@@ -12,7 +13,7 @@ class DishRecipes extends Component {
   state = { dish: {}, recipes: [] };
 
   async componentDidMount() {
-    const { dispatch, dishData } = this.props;
+    const { dispatch } = this.props;
     const dishPermalink = this.props.match.params.dish;
 
     dispatch(dishActions.getDishByPermalink(dishPermalink));
@@ -23,8 +24,21 @@ class DishRecipes extends Component {
     this.props.history.goBack();
   };
 
+  handleShowVideo = recipeId => {
+    const { recipeData, dispatch } = this.props;
+    const recipes = recipeData.recipes;
+
+    if (recipes) {
+      const recipe = recipes.find(r => r._id === recipeId);
+
+      if (recipe) {
+        dispatch(recipeActions.selectRecipe(recipe));
+      }
+    }
+  };
+
   render() {
-    const { dishData, recipeData, onClickRecipe } = this.props;
+    const { dishData, recipeData } = this.props;
 
     return (
       <React.Fragment>
@@ -39,7 +53,12 @@ class DishRecipes extends Component {
           </div>
           <div className="col-auto">
             {dishData && dishData.dish && recipeData && recipeData.recipes ? (
-              <Recipes dish={dishData.dish} items={recipeData.recipes} />
+              <Recipes
+                dish={dishData.dish}
+                items={recipeData.recipes}
+                selected={recipeData.selectedRecipe}
+                onClickRecipe={this.handleShowVideo}
+              />
             ) : (
               ""
             )}

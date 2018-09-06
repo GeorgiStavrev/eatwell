@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
+    const { toggled, onToggle } = this.props;
+    const navBarClasses = "collapse navbar-collapse" + (toggled ? " show" : "");
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand">EatWell</a>
@@ -14,22 +17,37 @@ class NavBar extends Component {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={onToggle}
         >
           <span className="navbar-toggler-icon" />
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className={navBarClasses} id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
+            <li className="nav-item">
               <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
             </li>
-            <li className="nav-item active">
-              <NavLink className="nav-link" to="/dish/pad-thai/recipes">
-                Pad Thai
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/meals/thisweek">
+                This week
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/meals/ingredients/buy">
+                <span>Shopping list</span>
+                <span className="ml-1 badge badge-pill badge-info">9</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/meals/plan">
+                Create meal plan
+              </NavLink>
+            </li>
+            <button className="btn btn btn-success my-2 my-sm-0" type="submit">
+              I feel lucky
+            </button>
           </ul>
           <form className="form-inline my-2 my-lg-0">
             <input

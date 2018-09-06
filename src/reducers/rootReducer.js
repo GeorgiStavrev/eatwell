@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import simpleReducer from "./simpleReducer";
 import dishReducer from "./dishReducer";
 import recipeReducer from "./recipeReducer";
+import uiReducer from "./uiReducer";
 
 export default combineReducers({
-  simpleReducer,
   dishReducer,
-  recipeReducer
+  recipeReducer,
+  uiReducer
 });

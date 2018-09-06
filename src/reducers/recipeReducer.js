@@ -13,6 +13,12 @@ export default (state = {}, action) => {
         recipes: payload
       };
     }
+    case types.SELECTED_RECIPE: {
+      return {
+        ...state,
+        selectedRecipe: payload
+      };
+    }
     default:
       return state;
   }

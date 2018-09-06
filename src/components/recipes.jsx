@@ -3,13 +3,13 @@ import EmbededVideo from "./embededVideo";
 
 class Recipes extends Component {
   render() {
-    const { dish, items, onClickRecipe } = this.props;
+    const { dish, items, selected, onClickRecipe } = this.props;
     return (
       <div className="mt-5">
         <h2>{dish.name} Recipes</h2>
         {items.map(d => (
           <div key={d._id} className="row recipe-row mt-2">
-            {d.videoShown ? (
+            {d && selected && d._id === selected._id ? (
               <div className="col-6">
                 <EmbededVideo videoUrl={d.videoUrl} />
               </div>
