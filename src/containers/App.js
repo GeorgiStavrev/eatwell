@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 // Actions
 import { dishActions } from "../actions/dish";
 import { uiActions } from "../actions/ui";
+import { shoppingListActions } from "../actions/shoppingList";
 
 // Components
 import DishRecipes from "./dishRecipes";
@@ -19,16 +20,23 @@ class App extends Component {
   async componentDidMount() {
     const { dispatch } = this.props;
     dispatch(dishActions.getAllDishes());
+    dispatch(shoppingListActions.loadAllItems());
   }
 
   render() {
-    const { ui } = this.props;
+    console.log("render app.js");
+    const { ui, shoppingList } = this.props;
+    console.log(shoppingList);
+    const navBarOptions = {
+      shoppingListItemsCount: shoppingList.items ? shoppingList.items.length : 0
+    };
     return (
       <BrowserRouter>
         <div>
           <NavBar
             toggled={ui.navBarToggled}
             onToggle={this.handleToggleNavBar}
+            options={navBarOptions}
           />
           <main role="main" className="container">
             <Switch>
@@ -64,9 +72,10 @@ class App extends Component {
   };
 }
 
-const mapStateToProps = ({ dishReducer, uiReducer }) => ({
+const mapStateToProps = ({ dishReducer, uiReducer, shoppingListReducer }) => ({
   dishData: dishReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  shoppingList: shoppingListReducer
 });
 
 export default connect(mapStateToProps)(App);

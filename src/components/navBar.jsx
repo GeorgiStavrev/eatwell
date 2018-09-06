@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
-    const { toggled, onToggle } = this.props;
+    const { options, toggled, onToggle } = this.props;
+    const { shoppingListItemsCount } = options;
     const navBarClasses = "collapse navbar-collapse" + (toggled ? " show" : "");
 
     return (
@@ -37,7 +38,9 @@ class NavBar extends Component {
             <li className="nav-item">
               <NavLink className="nav-link" to="/meals/ingredients/buy">
                 <span>Shopping list</span>
-                <span className="ml-1 badge badge-pill badge-info">9</span>
+                <span className="ml-1 badge badge-pill badge-info">
+                  {shoppingListItemsCount ? shoppingListItemsCount : "..."}
+                </span>
               </NavLink>
             </li>
             <li className="nav-item">
