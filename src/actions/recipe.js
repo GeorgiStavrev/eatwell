@@ -50,7 +50,7 @@ const selectRecipe = recipe => {
   return { type: types.SELECTED_RECIPE, payload: recipe };
 };
 
-export const recipeActions = {
+export const actions = {
   getRecipesByDishId,
   getRecipesByDishPermalink,
   selectRecipe

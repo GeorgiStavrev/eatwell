@@ -43,7 +43,7 @@ const dishNotFound = (dishId, permalink) => {
 };
 
 // action creators
-export const dishActions = {
+export const actions = {
   getAllDishes,
   receiveDishList,
   getDishByPermalink,

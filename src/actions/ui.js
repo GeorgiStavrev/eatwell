@@ -6,6 +6,6 @@ const toggleNavBar = () => {
   return { type: types.TOGGLE_NAV_BAR, payload: null };
 };
 
-export const uiActions = {
+export const actions = {
   toggleNavBar
 };

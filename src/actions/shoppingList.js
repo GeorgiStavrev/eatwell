@@ -21,6 +21,6 @@ const loadedAllItems = items => {
   return { type: types.LOADED_ALL, payload: items };
 };
 
-export const shoppingListActions = {
+export const actions = {
   loadAllItems
 };

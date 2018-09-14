@@ -31,8 +31,8 @@ class NavBar extends Component {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/meals/thisweek">
-                This week
+              <NavLink className="nav-link" to="/dashboard">
+                My meals
               </NavLink>
             </li>
             <li className="nav-item">

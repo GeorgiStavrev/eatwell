@@ -3,14 +3,17 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Actions
-import { dishActions } from "../actions/dish";
-import { uiActions } from "../actions/ui";
-import { shoppingListActions } from "../actions/shoppingList";
+import { actions as dishActions } from "../actions/dish";
+import { actions as uiActions } from "../actions/ui";
+import { actions as shoppingListActions } from "../actions/shoppingList";
 
 // Components
 import DishRecipes from "./dishRecipes";
 import NavBar from "../components/navBar";
 import Dashboard from "../components/dashboard";
+import Home from "../components/home";
+import Recipe from "./recipe";
+import NotFound404 from "../components/notFound404";
 
 // CSS
 import "../App.css";
@@ -24,9 +27,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("render app.js");
     const { ui, shoppingList } = this.props;
-    console.log(shoppingList);
     const navBarOptions = {
       shoppingListItemsCount: shoppingList.items ? shoppingList.items.length : 0
     };
@@ -41,10 +42,16 @@ class App extends Component {
           <main role="main" className="container">
             <Switch>
               <Route
+                path="/dish/:dish/recipes/:recipe"
+                render={this.renderRecipePage}
+              />
+              <Route
                 path="/dish/:dish/recipes"
                 render={this.renderDishRecipePage}
               />
-              <Route path="/" render={this.renderDashboard} />
+              <Route path="/dashboard" render={this.renderDashboard} />
+              <Route path="/404" component={NotFound404} />
+              <Route path="/" render={this.renderHome} />
             </Switch>
           </main>
         </div>
@@ -61,9 +68,34 @@ class App extends Component {
     return <DishRecipes {...routerProps} />;
   };
 
+  renderRecipePage = routerProps => {
+    return <Recipe {...routerProps} />;
+  };
+
   renderDashboard = routerProps => {
     const { dishData } = this.props;
     return <Dashboard {...routerProps} dishes={dishData.dishes} />;
+  };
+
+  renderHome = routerProps => {
+    const sliderData = [
+      {
+        imgUrl:
+          "https://www.slavorum.org/wp-content/uploads/2016/07/bulgarinafood-758x504.jpg",
+        name: "Bulgarian Food"
+      },
+      {
+        imgUrl:
+          "https://www.worldatlas.com/r/w728-h425-c728x425/upload/ca/77/28/shutterstock-406008751.jpg",
+        name: "Cheese & Wine"
+      },
+      {
+        imgUrl:
+          "https://media-cdn.tripadvisor.com/media/photo-s/05/1f/89/08/mana-fast-slow-food.jpg",
+        name: "Slow Food"
+      }
+    ];
+    return <Home {...routerProps} sliderData={sliderData} />;
   };
 
   loadDishData = dishPermalink => {

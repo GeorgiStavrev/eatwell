@@ -6,6 +6,9 @@ const recipes = [
     videoUrl: "https://www.youtube.com/embed/m88rF0rwHo8",
     videoShown: false,
     name: "How to Make Classic Pad Thai | Cooking with Poo",
+    permalink: "classic-pad-thai-cooking-with-poo",
+    description:
+      "This is the description of the recipe. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis mauris malesuada tempor facilisis. Curabitur erat velit, dapibus",
     tags: "foodtube",
     ingredients: [
       { name: "pad thai or lo mein noodles", quantity: "8 ounces" },
@@ -35,6 +38,7 @@ const recipes = [
     videoUrl: "https://www.youtube.com/embed/F5-nfxQjfZU",
     videoShown: false,
     name: "The BEST Pad Thai Recipe",
+    permalink: "the-best-pad-thai-recipe",
     tags: "asianathome",
     ingredients: [
       { name: "pad thai or lo mein noodles", quantity: "8 ounces" },
@@ -60,6 +64,8 @@ const recipes = [
   {
     _id: "3",
     dishId: "2",
+    name: "Some moussaka recipe",
+    permalink: "some-moussaka-recipe",
     ingredients: [
       { name: "lamb mince", quantity: "750g/1lb 10½oz" },
       { name: "onion, finely chopped", quantity: "1" },

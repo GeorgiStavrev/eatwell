@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 // Actions
 import { actions as dishActions } from "../actions/dish";
@@ -7,11 +8,9 @@ import { actions as recipeActions } from "../actions/recipe";
 
 // Components
 import DishCard from "../components/dishCard";
-import Recipes from "../components/recipes";
+import EmbededVideo from "../components/embededVideo";
 
-class DishRecipes extends Component {
-  state = { dish: {}, recipes: [] };
-
+class Recipe extends Component {
   async componentDidMount() {
     const { dispatch } = this.props;
     const dishPermalink = this.props.match.params.dish;
@@ -24,21 +23,16 @@ class DishRecipes extends Component {
     this.props.history.goBack();
   };
 
-  handleShowVideo = recipeId => {
-    const { recipeData, dispatch } = this.props;
-    const recipes = recipeData.recipes;
-
-    if (recipes) {
-      const recipe = recipes.find(r => r._id === recipeId);
-
-      if (recipe) {
-        dispatch(recipeActions.selectRecipe(recipe));
-      }
-    }
-  };
-
   render() {
     const { dishData, recipeData } = this.props;
+    const recipePermalink = this.props.match.params.recipe;
+
+    const selectedRecipe =
+      dishData && recipeData && recipeData.recipes
+        ? recipeData.recipes.find(
+            recipe => recipe.permalink === recipePermalink
+          )
+        : null;
 
     return (
       <React.Fragment>
@@ -51,16 +45,28 @@ class DishRecipes extends Component {
           <div className="col-4 mt-5">
             {dishData && dishData.dish ? <DishCard dish={dishData.dish} /> : ""}
           </div>
-          <div className="col-auto">
-            {dishData && dishData.dish && recipeData && recipeData.recipes ? (
-              <Recipes
-                dish={dishData.dish}
-                items={recipeData.recipes}
-                selected={recipeData.selectedRecipe}
-                onClickRecipe={this.handleShowVideo}
-              />
+          <div className="col-8">
+            {selectedRecipe ? (
+              <div>
+                <div className="row">
+                  <h2>{selectedRecipe.name}</h2>
+                </div>
+                <div className="row">
+                  <EmbededVideo videoUrl={selectedRecipe.videoUrl} />
+                </div>
+                <div className="row">
+                  <ul>
+                    {selectedRecipe.ingredients.map(i => (
+                      <li key={i.name}>
+                        {i.name} {i.quantity}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="row">{selectedRecipe.description}</div>
+              </div>
             ) : (
-              ""
+              <Redirect to="/404" />
             )}
           </div>
         </div>
@@ -74,4 +80,4 @@ const mapStateToProps = ({ dishReducer, recipeReducer }) => ({
   recipeData: recipeReducer
 });
 
-export default connect(mapStateToProps)(DishRecipes);
+export default connect(mapStateToProps)(Recipe);
