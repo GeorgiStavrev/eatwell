@@ -60,8 +60,8 @@ class DishRecipes extends Component {
                 onClickRecipe={this.handleShowVideo}
               />
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
         </div>
       </React.Fragment>

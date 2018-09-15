@@ -30,13 +30,18 @@ class NavBar extends Component {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item|">
+              <NavLink className="nav-link" to="/menu">
+                Menus
+              </NavLink>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/dashboard">
                 My meals
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/meals/ingredients/buy">
+              <NavLink className="nav-link" to="/shoppingList">
                 <span>Shopping list</span>
                 <span className="ml-1 badge badge-pill badge-info">
                   {shoppingListItemsCount ? shoppingListItemsCount : "..."}
