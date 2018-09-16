@@ -10,6 +10,8 @@ import { actions as uiActions } from "../actions/ui";
 import DishRecipes from "./dishRecipes";
 import NotFound404 from "../components/notFound404";
 
+// https://materializecss.com/cards.html
+
 class Menus extends Component {
     render() {
         return (<h2>Menus</h2>);
