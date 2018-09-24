@@ -11,7 +11,7 @@ import DishRecipes from "./dishRecipes";
 import NotFound404 from "../components/notFound404";
 
 // https://materializecss.com/cards.html
-
+// https://semantic-ui.com/
 class Menus extends Component {
     render() {
         return (<h2>Menus</h2>);

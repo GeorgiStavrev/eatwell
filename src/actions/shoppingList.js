@@ -1,4 +1,4 @@
-import svc from "../services/fakeShoppingListService";
+import svc from "../services/shoppingListService";
 
 export const types = {
   LOADED_ALL: "LOADED_ALL",
@@ -14,11 +14,17 @@ const loadAllItems = () => {
 };
 
 const loading = () => {
-  return { type: types.LOADING, payload: null };
+  return {
+    type: types.LOADING,
+    payload: null
+  };
 };
 
 const loadedAllItems = items => {
-  return { type: types.LOADED_ALL, payload: items };
+  return {
+    type: types.LOADED_ALL,
+    payload: items
+  };
 };
 
 export const actions = {
