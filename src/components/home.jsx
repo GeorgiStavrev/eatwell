@@ -6,21 +6,20 @@ class Home extends Component {
 
     const sliderItemsRendered = sliderData
       ? sliderData.map((item, index) => {
-          console.log(index);
-          const itemClasses =
-            index == 0 ? "carousel-item active" : "carousel-item";
+        const itemClasses =
+          index === 0 ? "carousel-item active" : "carousel-item";
 
-          return (
-            <div key={item.name} className={itemClasses}>
-              <img
-                className="d-block w-100"
-                width="500px"
-                src={item.imgUrl}
-                alt={item.name}
-              />
-            </div>
-          );
-        })
+        return (
+          <div key={item.name} className={itemClasses}>
+            <img
+              className="d-block w-100"
+              width="500px"
+              src={item.imgUrl}
+              alt={item.name}
+            />
+          </div>
+        );
+      })
       : "";
 
     return (

@@ -20,6 +20,7 @@ import {
 import {
   actions as shoppingListActions
 } from "../actions/shoppingList";
+import { actions as authActions } from "../actions/auth";
 
 // Components
 import Menus from "./menus"
@@ -30,6 +31,7 @@ import Dashboard from "../components/dashboard";
 import Home from "../components/home";
 import Recipe from "./recipe";
 import NotFound404 from "../components/notFound404";
+import Login from "../components/login";
 
 // CSS
 import "../App.css";
@@ -74,12 +76,20 @@ class App extends Component {
               />
               <Route path="/dashboard" render={this.renderDashboard} />
               <Route path="/404" component={NotFound404} />
+              <Route path="/login" render={this.renderLogin} />
               <Route path="/" render={this.renderHome} />
             </Switch>
           </main>
         </div>
       </BrowserRouter>
     );
+  }
+
+  handleLogin = (user) => {
+    const {
+      dispatch
+    } = this.props;
+    dispatch(authActions.login(user));
   }
 
   handleToggleNavBar = () => {
@@ -135,6 +145,15 @@ class App extends Component {
     />;
   };
 
+  renderLogin = routerProps => {
+    return <Login {...routerProps
+    }
+      onLogin={
+        this.handleLogin
+      }
+    />;
+  };
+
   loadDishData = dishPermalink => {
     const {
       dispatch
@@ -146,11 +165,13 @@ class App extends Component {
 const mapStateToProps = ({
   dishReducer,
   uiReducer,
-  shoppingListReducer
+  shoppingListReducer,
+  authReducer
 }) => ({
   dishData: dishReducer,
   ui: uiReducer,
-  shoppingList: shoppingListReducer
+  shoppingList: shoppingListReducer,
+  auth: authReducer
 });
 
 export default connect(mapStateToProps)(App);

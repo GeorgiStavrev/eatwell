@@ -14,7 +14,7 @@ const dishes = [{
   }
 ];
 
-const apiUrl = "http://127.0.0.1:8080/dish/"
+const apiUrl = "http://127.0.0.1:8080/api/v1/dish"
 
 async function getDishes() {
   try {
