@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
+import LoginState from "./loginState";
+import Login from "./login";
+
 class NavBar extends Component {
   render() {
     const { options, toggled, onToggle } = this.props;
@@ -71,6 +74,7 @@ class NavBar extends Component {
               Find recipe
             </button>
           </form>
+          <LoginState authData={this.props.authData} />
         </div>
       </nav>
     );

@@ -1,14 +1,14 @@
-import http from './httpService';
+import http from "./httpService";
+import logger from "./logService";
 
-const apiUrl = "http://127.0.0.1:8080/api/v1/shoppingList"
+const apiUrl = "http://127.0.0.1:8080/api/v1/shoppingList";
 
 async function getAllItems() {
   try {
     const response = await http.get(apiUrl);
-    if (response.status === 200)
-      return response.json();
+    if (response.status === 200) return response.json();
   } catch (error) {
-    alert(error);
+    logger.log("http call error", error);
   }
 }
 
