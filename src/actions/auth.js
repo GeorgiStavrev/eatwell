@@ -29,6 +29,20 @@ const loadFromStorage = () => {
   };
 };
 
+const logout = () => {
+  return async dispatch => {
+    svc.logout();
+    dispatch(logoutSuccess());
+  };
+};
+
+const logoutSuccess = () => {
+  return {
+    type: types.LOGOUT,
+    payload: null
+  };
+};
+
 const loginSuccess = currentUser => {
   return {
     type: types.LOGIN_SUCCESS,
@@ -46,5 +60,6 @@ const loginFailure = () => {
 // action creators
 export const actions = {
   login,
-  loadFromStorage
+  loadFromStorage,
+  logout
 };

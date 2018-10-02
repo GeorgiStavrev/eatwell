@@ -18,6 +18,7 @@ import Home from "../components/home";
 import Recipe from "./recipe";
 import NotFound404 from "../components/notFound404";
 import Login from "../components/login";
+import Logout from "../components/logout";
 
 // CSS
 import "../App.css";
@@ -34,9 +35,11 @@ class App extends Component {
 
   render() {
     const { ui, shoppingList } = this.props;
+
     const navBarOptions = {
       shoppingListItemsCount: shoppingList.items ? shoppingList.items.length : 0
     };
+
     return (
       <BrowserRouter>
         <div>
@@ -61,6 +64,7 @@ class App extends Component {
               <Route path="/dashboard" render={this.renderDashboard} />
               <Route path="/404" component={NotFound404} />
               <Route path="/login" render={this.renderLogin} />
+              <Route path="/logout" render={this.renderLogout} />
               <Route path="/" render={this.renderHome} />
             </Switch>
           </main>
@@ -72,6 +76,11 @@ class App extends Component {
   handleLogin = user => {
     const { dispatch } = this.props;
     dispatch(authActions.login(user));
+  };
+
+  handleLogout = () => {
+    const { dispatch } = this.props;
+    dispatch(authActions.logout());
   };
 
   handleToggleNavBar = () => {
@@ -121,6 +130,10 @@ class App extends Component {
         onLogin={this.handleLogin}
       />
     );
+  };
+
+  renderLogout = routerProps => {
+    return <Logout {...routerProps} onLogout={this.handleLogout} />;
   };
 
   loadDishData = dishPermalink => {

@@ -24,8 +24,7 @@ function logout() {
 }
 
 function getCurrentUser() {
-  const jwt = localStorage.getItem(tokenKey);
-  console.log("jwt: " + jwt);
+  const jwt = getAuthToken();
   if (jwt) {
     const user = jwtDecode(jwt);
     return user;
@@ -34,16 +33,16 @@ function getCurrentUser() {
   return null;
 }
 
-function getToken() {
+function getAuthToken() {
   return localStorage.getItem(tokenKey);
 }
 
-http.setJwt(getToken());
+http.setJwt(getAuthToken());
 
 export default {
   register,
   login,
   getCurrentUser,
   logout,
-  getToken
+  getAuthToken
 };

@@ -1,4 +1,4 @@
-import svc from "../services/fakeDishService";
+import svc from "../services/dishService";
 
 export const types = {
   GET_DISH_BY_PERMALINK: "GET_DISH_BY_PERMALINK",

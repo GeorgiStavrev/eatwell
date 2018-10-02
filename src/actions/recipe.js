@@ -1,5 +1,5 @@
 import svc from "../services/fakeRecipeService";
-import dishSvc from "../services/fakeDishService";
+import dishSvc from "../services/dishService";
 
 export const types = {
   RECIPES_FOUND: "RECIPES_FOUND",

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 import LoginState from "./loginState";
-import Login from "./login";
 
 class NavBar extends Component {
   render() {
@@ -47,7 +46,9 @@ class NavBar extends Component {
               <NavLink className="nav-link" to="/shoppingList">
                 <span>Shopping list</span>
                 <span className="ml-1 badge badge-pill badge-info">
-                  {shoppingListItemsCount ? shoppingListItemsCount : "..."}
+                  {shoppingListItemsCount !== "undefined"
+                    ? shoppingListItemsCount
+                    : "..."}
                 </span>
               </NavLink>
             </li>
