@@ -12,13 +12,13 @@ class LoginState extends Component {
         <li>
           <span>
             <i className="fa fa-user-plus" />{" "}
-            <NavLink to="/register">Sign Up</NavLink>
+            <NavLink to="/signup">Sign Up</NavLink>
           </span>
         </li>
         <li style={{ marginLeft: "10px" }}>
           <span>
             <i className="fa fa-sign-in" />{" "}
-            <NavLink to="/login">Sign In</NavLink>
+            <NavLink to="/signin">Sign In</NavLink>
           </span>
         </li>
       </ul>
@@ -28,12 +28,12 @@ class LoginState extends Component {
         style={{ marginLeft: "10px" }}
       >
         <li>
-          <span>{authData.currentUser.email}</span>
+          <span>{authData.currentUser.first_name}</span>
         </li>
         <li style={{ marginLeft: "2px" }}>
           <span>
             <i className="fa fa-sign-out" />{" "}
-            <NavLink to="/logout">Logout</NavLink>
+            <NavLink to="/signout">Logout</NavLink>
           </span>
         </li>
       </ul>

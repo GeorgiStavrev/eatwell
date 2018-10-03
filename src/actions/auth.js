@@ -20,6 +20,24 @@ const login = user => {
   };
 };
 
+const register = userData => {
+  return async dispatch => {
+    const regResult = await svc.register(userData);
+    if (regResult) {
+      const res = await svc.login({
+        email: userData.email,
+        password: userData.password
+      });
+      const currentUser = svc.getCurrentUser();
+      if (res && currentUser) {
+        dispatch(loginSuccess(currentUser));
+      } else {
+        dispatch(loginFailure());
+      }
+    }
+  };
+};
+
 const loadFromStorage = () => {
   return async dispatch => {
     const currentUser = svc.getCurrentUser();
@@ -61,5 +79,6 @@ const loginFailure = () => {
 export const actions = {
   login,
   loadFromStorage,
-  logout
+  logout,
+  register
 };

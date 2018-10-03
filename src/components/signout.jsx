@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-class Logout extends Component {
+class SignOut extends Component {
   render() {
-    const { onLogout } = this.props;
+    const { onSignOut } = this.props;
 
-    onLogout();
+    onSignOut();
     return <Redirect to="/" />;
   }
 }
 
-export default Logout;
+export default SignOut;

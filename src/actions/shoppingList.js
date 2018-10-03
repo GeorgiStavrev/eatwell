@@ -9,7 +9,6 @@ const loadAllItems = () => {
   return async dispatch => {
     dispatch(loading());
     const items = await svc.getAllItems();
-    console.log("dispatch(loadedAllItems(items)); " + items);
     dispatch(loadedAllItems(items));
   };
 };

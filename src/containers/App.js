@@ -17,13 +17,15 @@ import Dashboard from "../components/dashboard";
 import Home from "../components/home";
 import Recipe from "./recipe";
 import NotFound404 from "../components/notFound404";
-import Login from "../components/login";
-import Logout from "../components/logout";
+import SignIn from "../components/signin";
+import SignOut from "../components/signout";
+import SignUp from "../components/signup";
 
 // CSS
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.min.css";
+import register from "../registerServiceWorker";
 
 class App extends Component {
   async componentDidMount() {
@@ -63,8 +65,9 @@ class App extends Component {
               />
               <Route path="/dashboard" render={this.renderDashboard} />
               <Route path="/404" component={NotFound404} />
-              <Route path="/login" render={this.renderLogin} />
-              <Route path="/logout" render={this.renderLogout} />
+              <Route path="/signin" render={this.renderSignIn} />
+              <Route path="/signout" render={this.renderSignOut} />
+              <Route path="/signup" render={this.renderSignUp} />
               <Route path="/" render={this.renderHome} />
             </Switch>
           </main>
@@ -73,14 +76,19 @@ class App extends Component {
     );
   }
 
-  handleLogin = user => {
+  handleSignIn = user => {
     const { dispatch } = this.props;
     dispatch(authActions.login(user));
   };
 
-  handleLogout = () => {
+  handleSignOut = () => {
     const { dispatch } = this.props;
     dispatch(authActions.logout());
+  };
+
+  handleSignUp = userData => {
+    const { dispatch } = this.props;
+    dispatch(authActions.register(userData));
   };
 
   handleToggleNavBar = () => {
@@ -122,18 +130,28 @@ class App extends Component {
     return <Home {...routerProps} sliderData={sliderData} />;
   };
 
-  renderLogin = routerProps => {
+  renderSignIn = routerProps => {
     return (
-      <Login
+      <SignIn
         {...routerProps}
         authData={this.props.auth}
-        onLogin={this.handleLogin}
+        onSignIn={this.handleSignIn}
       />
     );
   };
 
-  renderLogout = routerProps => {
-    return <Logout {...routerProps} onLogout={this.handleLogout} />;
+  renderSignOut = routerProps => {
+    return <SignOut {...routerProps} onSignOut={this.handleSignOut} />;
+  };
+
+  renderSignUp = routerProps => {
+    return (
+      <SignUp
+        {...routerProps}
+        authData={this.props.auth}
+        onSignUp={this.handleSignUp}
+      />
+    );
   };
 
   loadDishData = dishPermalink => {
