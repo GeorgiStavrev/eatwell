@@ -9,14 +9,18 @@ class SignUp extends Form {
     return "SignUp";
   };
 
+  formInitialState = () => {
+    return {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: ""
+    };
+  };
+
   doSubmit = data => {
     const { onSignUp } = this.props;
-    onSignUp({
-      first_name: data.first_name,
-      last_name: data.last_name,
-      email: data.email,
-      password: data.password
-    });
+    onSignUp(data);
   };
 
   render() {

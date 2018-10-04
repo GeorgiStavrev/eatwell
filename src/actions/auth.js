@@ -9,6 +9,7 @@ export const types = {
 };
 
 const login = user => {
+  console.log(user);
   return async dispatch => {
     const res = await svc.login(user);
     const currentUser = svc.getCurrentUser();

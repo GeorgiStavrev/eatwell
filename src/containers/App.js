@@ -25,7 +25,6 @@ import SignUp from "../components/signup";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.min.css";
-import register from "../registerServiceWorker";
 
 class App extends Component {
   async componentDidMount() {
@@ -136,7 +135,7 @@ class App extends Component {
         {...routerProps}
         dispatch={this.props.dispatch}
         authData={this.props.auth}
-        formData={this.props.form.data}
+        formData={this.props.formData}
         onSignIn={this.handleSignIn}
       />
     );
@@ -173,7 +172,7 @@ const mapStateToProps = ({
   ui: uiReducer,
   shoppingList: shoppingListReducer,
   auth: authReducer,
-  form: formReducer
+  formData: formReducer
 });
 
 export default connect(mapStateToProps)(App);

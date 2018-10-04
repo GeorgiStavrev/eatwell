@@ -1,33 +1,31 @@
 import { types } from "../actions/form";
 import _ from "lodash";
 
-const defaultState = { data: {} };
+const defaultState = {};
 
 export default (state = {}, action) => {
   const { type, payload } = action;
 
-  if (state.data === undefined) {
+  if (state === undefined) {
     return defaultState;
   }
 
   switch (type) {
     case types.FIELD_CHANGED: {
-      const { data } = state;
-      let forms = { data };
-      if (forms === undefined) {
-        forms = {};
-      }
-
       if (payload) {
-        let formData = forms[payload.form];
+        let formData = state[payload.form];
         if (formData === undefined) {
           formData = {};
-          forms[payload.form] = formData;
+          state[payload.form] = formData;
         }
         _.set(formData, payload.name, payload.value);
-        return { ...state, data: forms };
+        return { ...state };
       }
 
+      return { ...state };
+    }
+    case types.FORM_RESET: {
+      state[payload.form] = payload.initialState;
       return { ...state };
     }
     default:

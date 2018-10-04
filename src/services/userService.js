@@ -6,8 +6,6 @@ const tokenKey = "token";
 const apiUrl = "http://127.0.0.1:8080/auth";
 
 async function register(user) {
-  console.log("register");
-  console.log(user);
   const response = await http.post(apiUrl + "/register", user);
   const jwt = response.headers["authorization"];
   localStorage.setItem(tokenKey, jwt);

@@ -9,9 +9,13 @@ class SignIn extends Form {
     return "SignIn";
   };
 
+  formInitialState = () => {
+    return { email: "", password: "" };
+  };
+
   doSubmit = data => {
     const { onSignIn } = this.props;
-    onSignIn({ email: data.email, password: data.password });
+    onSignIn(data);
   };
 
   render() {
