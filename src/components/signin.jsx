@@ -5,11 +5,13 @@ import { Redirect } from "react-router-dom";
 import Form from "./form";
 
 class SignIn extends Form {
-  state = { data: { email: "", password: "" } };
+  formKey = () => {
+    return "SignIn";
+  };
 
   doSubmit = data => {
     const { onSignIn } = this.props;
-    onSignIn(data);
+    onSignIn({ email: data.email, password: data.password });
   };
 
   render() {

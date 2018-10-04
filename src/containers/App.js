@@ -134,7 +134,9 @@ class App extends Component {
     return (
       <SignIn
         {...routerProps}
+        dispatch={this.props.dispatch}
         authData={this.props.auth}
+        formData={this.props.form.data}
         onSignIn={this.handleSignIn}
       />
     );
@@ -164,12 +166,14 @@ const mapStateToProps = ({
   dishReducer,
   uiReducer,
   shoppingListReducer,
-  authReducer
+  authReducer,
+  formReducer
 }) => ({
   dishData: dishReducer,
   ui: uiReducer,
   shoppingList: shoppingListReducer,
-  auth: authReducer
+  auth: authReducer,
+  form: formReducer
 });
 
 export default connect(mapStateToProps)(App);

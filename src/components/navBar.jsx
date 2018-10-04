@@ -46,7 +46,7 @@ class NavBar extends Component {
               <NavLink className="nav-link" to="/shoppingList">
                 <span>Shopping list</span>
                 <span className="ml-1 badge badge-pill badge-info">
-                  {shoppingListItemsCount !== "undefined"
+                  {shoppingListItemsCount !== undefined
                     ? shoppingListItemsCount
                     : "..."}
                 </span>

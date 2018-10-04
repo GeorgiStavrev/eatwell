@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import { actions as formActions } from "../actions/form";
 
 class Form extends Component {
   handleChange = ({ currentTarget: input }) => {
-    let data = { ...this.state.data };
-    _.set(data, input.name, input.value);
-    this.setState({ data });
+    const { dispatch } = this.props;
+    dispatch(
+      formActions.changeFieldValue(this.formKey(), input.name, input.value)
+    );
   };
 
   handleSubmit = e => {
     e.preventDefault();
-
-    let data = { ...this.state.data };
-    this.doSubmit(data);
+    this.doSubmit(this.props.formData[this.formKey()]);
   };
 
   renderInput = (name, label, type = "text", autofocus = false) => {
+    const { formData } = this.props;
+    const myFormData = formData[this.formKey()];
+    const fieldData = myFormData ? myFormData[name] : "";
     return (
       <div className="form-group">
         <label htmlFor={name}>{label}</label>
@@ -23,7 +26,7 @@ class Form extends Component {
           type={type}
           name={name}
           className="form-control"
-          value={this.state.data[name]}
+          value={fieldData}
           autoFocus={autofocus}
           onChange={this.handleChange}
         />
