@@ -52,16 +52,16 @@ class NavBar extends Component {
                 </span>
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/meals/plan">
                 Create meal plan
               </NavLink>
-            </li>
-            <button className="btn btn btn-success my-2 my-sm-0" type="submit">
+            </li> */}
+            {/* <button className="btn btn btn-success my-2 my-sm-0" type="submit">
               I feel lucky
-            </button>
+            </button> */}
           </ul>
-          <form className="form-inline my-2 my-lg-0">
+          {/* <form className="form-inline my-2 my-lg-0">
             <input
               className="form-control mr-sm-2"
               type="search"
@@ -74,7 +74,7 @@ class NavBar extends Component {
             >
               Find recipe
             </button>
-          </form>
+          </form> */}
           <LoginState authData={this.props.authData} />
         </div>
       </nav>

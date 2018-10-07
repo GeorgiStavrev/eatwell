@@ -3,10 +3,10 @@ import http from "./httpService";
 
 const tokenKey = "token";
 
-const apiUrl = "http://127.0.0.1:8080/auth";
+const route = "/auth";
 
 async function register(user) {
-  const response = await http.post(apiUrl + "/register", user);
+  const response = await http.post(route + "/register", user);
   const jwt = response.headers["authorization"];
   localStorage.setItem(tokenKey, jwt);
 
@@ -14,7 +14,7 @@ async function register(user) {
 }
 
 async function login(credentials) {
-  const { data: jwt, status } = await http.post(apiUrl + "/login", credentials);
+  const { data: jwt, status } = await http.post(route + "/login", credentials);
   if (jwt) localStorage.setItem(tokenKey, jwt.token);
   return status === 200;
 }

@@ -30,7 +30,7 @@ class LoginState extends Component {
         <li>
           <span>{authData.currentUser.first_name}</span>
         </li>
-        <li style={{ marginLeft: "2px" }}>
+        <li className="ml-2">
           <span>
             <i className="fa fa-sign-out" />{" "}
             <NavLink to="/signout">Logout</NavLink>
