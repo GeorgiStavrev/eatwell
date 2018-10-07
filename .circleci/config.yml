@@ -1,0 +1,56 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: set azure cli repo
+          command: |
+            AZ_REPO=$(lsb_release -cs)
+            A="deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main"
+            echo $A | sudo tee /etc/apt/sources.list.d/azure-cli.list
+
+      - run:
+          name: add microsoft azure cert
+          command: |
+            curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+
+      - run:
+          name: install azure cli
+          command: |
+            sudo apt-get install apt-transport-https
+            sudo apt-get update
+            sudo apt-get install azure-cli
+
+      - run: sh ./deploy.sh
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
