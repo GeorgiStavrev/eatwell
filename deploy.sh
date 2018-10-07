@@ -21,6 +21,8 @@ echo ""
 
 # BUILD AND TAG THE IMAGE
 echo "Building and pushing the image"
+rm Dockerfile
+mv Dockerfile.prod Dockerfile
 docker build . -t $IMG_NAME
 docker tag $IMG_NAME $AZACR_URL/$REPO_NAME:$TAG
 docker push $AZACR_URL/$REPO_NAME:$TAG
